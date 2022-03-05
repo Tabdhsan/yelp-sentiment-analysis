@@ -1,6 +1,7 @@
 #%%
 import re
 from time import sleep
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -80,7 +81,8 @@ def get_single_page_reviews(base_link, start):
 
 def get_date_review_object(page_reviews_list, all_reviews):
     for review in page_reviews_list:
-        date = review.find("span", {"class": "css-1e4fdj9"}).text
+        # FIXME: Find a better way than hardcoding the date class
+        date = review.find("span", {"class": "css-chan6m"}).text
         comment = review.find("p", {"class": re.compile(".*comment.*")}).text.replace(
             "\xa0", ""
         )
@@ -97,3 +99,5 @@ def get_date_review_object(page_reviews_list, all_reviews):
 # %%
 
 create_dataframe_and_plot(DTUT_BASE_LINK)
+
+# %%
