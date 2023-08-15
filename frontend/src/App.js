@@ -3,77 +3,48 @@ import { Box, Button, Stack } from '@mui/material';
 import GraphCard from './components/GraphCard';
 import InputCard from './components/InputCard';
 import Loading from './assets/LoadingToaster.gif';
+import { getDetails } from './api';
 
 function App() {
 	const [loading, setLoading] = useState(false);
-
 	const [firstUrl, setFirstUrl] = useState('');
 	const [secondUrl, setSecondUrl] = useState('');
-
 	const [url1Graph, setUrl1Graph] = useState('');
 	const [url2Graph, setUrl2Graph] = useState('');
-	const [dataLoaded, setDataLoaded] = useState(false);
-
-	// FOR DEMO
 	const [graph1Info, setGraph1Info] = useState({});
 	const [graph2Info, setGraph2Info] = useState({});
+	const [dataLoaded, setDataLoaded] = useState(false);
 
 	const handleSubmit = async e => {
 		e.preventDefault();
 		setDataLoaded(false);
-
-		// Start loading animation
 		setLoading(true);
 
-		fetch(
-			`http://localhost:5000/getGraph?url1=${firstUrl}&url2=${secondUrl}`,
-			{
-				headers: {
-					'Access-Control-Allow-Origin': '*',
-				},
-			}
-		)
-			.then(response => response.json())
-			.then(res => {
-				console.log('success', res);
-				// console.log('data.graph', res.data.graph)
-				// These are testing
-				setUrl1Graph(`data:image/png;base64,${res.data.graph1.image}`);
-				setUrl2Graph(`data:image/png;base64,${res.data.graph2.image}`);
-				const { graph1, graph2 } = res.data;
+		try {
+			const data = await getDetails(firstUrl, secondUrl);
+			setUrl1Graph(`data:image/png;base64,${data.data.graph1.image}`);
+			setUrl2Graph(`data:image/png;base64,${data.data.graph2.image}`);
+			const { graph1, graph2 } = data.data;
 
-				setGraph1Info({
-					general: graph1.general,
-					title: graph1.reasons.title,
-					info: graph1.reasons.info,
-				});
+			setGraph1Info({
+				general: graph1.general,
+				title: graph1.reasons.title,
+				info: graph1.reasons.info,
+			});
 
-				setGraph2Info({
-					general: graph2.general,
-					title: graph2.reasons.title,
-					info: graph2.reasons.info,
-				});
+			setGraph2Info({
+				general: graph2.general,
+				title: graph2.reasons.title,
+				info: graph2.reasons.info,
+			});
 
-				// setUrl1Graph(`data:image/png;base64,${res.data.url1GraphImage}`)
-				// setUrl2Graph(`data:image/png;base64,${res.data.url2GraphImage}`)
-				// setGptBlurb(res.data.gptBlurb)
-				setDataLoaded(true);
-			})
-			.catch(error => {
-				// Handle the error
-				console.log('error', error);
-			})
-			.finally(() => setLoading(false));
-
-		// Stop loading animation
-
-		// Clear the input field
-		// setUrl('');
+			setDataLoaded(true);
+		} catch (error) {
+			console.log('error', error);
+		} finally {
+			setLoading(false);
+		}
 	};
-
-	// TODOTAB: add shadows
-	// TODOTAB: change background colour
-	// TODOTAB: Make graph stuff a separate component
 
 	return (
 		<Box

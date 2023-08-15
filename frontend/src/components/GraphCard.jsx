@@ -1,31 +1,31 @@
+import React from 'react';
 import { Stack, Typography } from '@mui/material';
-
 
 const GraphCard = ({ imgSrc, caption, title, bullets }) => {
 	return (
 		<Stack>
 			<Stack
-				mx='auto'
+				mx="auto"
 				sx={{
 					borderRadius: '1rem',
-					boxShadow: '0 0 10px rgba(0,0,0,0.3)',
+					boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)',
 					backgroundColor: 'white',
 					alignItems: 'center',
 				}}
 			>
 				<img
-					src={imgSrc ?? ''}
-					alt='Graph1'
+					src={imgSrc || ''}
+					alt="Graph1"
 					width={800}
 					style={{
 						borderRadius: '1rem',
 					}}
 				/>
 				<Typography
-					variant='h6'
-					textAlign='center'
-					mx='5rem'
-					mt='1rem'
+					variant="h6"
+					textAlign="center"
+					mx="5rem"
+					mt="1rem"
 					width={800}
 					p={2}
 				>
@@ -35,23 +35,23 @@ const GraphCard = ({ imgSrc, caption, title, bullets }) => {
 
 			<Stack
 				mt={4}
-				ml='6rem'
+				ml="auto"
+				mr="auto"
 				sx={{
 					borderRadius: '1rem',
-					boxShadow: '0 0 10px rgba(0,0,0,0.3)',
+					boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)',
 					backgroundColor: 'white',
 					width: 800,
 					padding: '2rem',
-					mx: 'auto',
 				}}
 			>
-				<Typography variant='h6'>{title}</Typography>
+				<Typography variant="h6">{title}</Typography>
 
 				{bullets?.map((item, index) => (
 					<Typography
-						component={'li'}
+						component="li"
 						key={index}
-						variant='body1'
+						variant="body1"
 						sx={{
 							marginLeft: '1rem',
 							color: '#444',

@@ -1,5 +1,5 @@
+import React from 'react';
 import { Box, Typography, TextField, Button, Stack } from '@mui/material';
-
 
 const InputCard = ({
 	firstUrl,
@@ -8,20 +8,27 @@ const InputCard = ({
 	setSecondUrl,
 	handleSubmit,
 }) => {
+	const handleFirstUrlChange = (e) => {
+		setFirstUrl(e.target.value);
+	};
+
+	const handleSecondUrlChange = (e) => {
+		setSecondUrl(e.target.value);
+	};
+
 	return (
 		<Stack
 			sx={{
 				background: '#fff',
 				padding: '5rem',
 				borderRadius: '1rem',
-				boxShadow: '0 0 10px rgba(0,0,0,0.3)',
+				boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)',
 			}}
-			textAlign='center'
-			alignItems='center'
+			textAlign="center"
+			alignItems="center"
 		>
-
 			<Typography
-				variant='h2'
+				variant="h2"
 				sx={{
 					marginBottom: '1rem',
 					color: '#2ecc71',
@@ -32,24 +39,21 @@ const InputCard = ({
 				Compare Yelp Ratings
 			</Typography>
 
-			<Typography
-				variant='h5'
-				sx={{ marginBottom: '1rem', color: '#444' }}
-			>
+			<Typography variant="h5" sx={{ marginBottom: '1rem', color: '#444' }}>
 				Please Enter Two Yelp URLs
 			</Typography>
 
-			<Stack direction='row'>
+			<Stack direction="row">
 				<Box
-					component='form'
+					component="form"
 					onSubmit={handleSubmit}
 					sx={{ display: 'flex', alignItems: 'center' }}
 				>
 					<TextField
-						type='text'
-						label='Enter URL 1'
-						variant='outlined'
-						onChange={e => setFirstUrl(e.target.value)}
+						type="text"
+						label="Enter URL 1"
+						variant="outlined"
+						onChange={handleFirstUrlChange}
 						sx={{
 							marginRight: '0.5rem',
 							'& fieldset': { borderColor: '#2ecc71' },
@@ -58,10 +62,10 @@ const InputCard = ({
 					/>
 
 					<TextField
-						type='text'
-						label='Enter URL 2'
-						variant='outlined'
-						onChange={e => setSecondUrl(e.target.value)}
+						type="text"
+						label="Enter URL 2"
+						variant="outlined"
+						onChange={handleSecondUrlChange}
 						sx={{
 							marginRight: '0.5rem',
 							'& fieldset': { borderColor: '#2ecc71' },
@@ -70,8 +74,8 @@ const InputCard = ({
 					/>
 
 					<Button
-						type='submit'
-						variant='contained'
+						type="submit"
+						variant="contained"
 						sx={{
 							backgroundColor: '#2ecc71',
 							color: '#fff',
@@ -80,7 +84,7 @@ const InputCard = ({
 							py: 1,
 							'&:hover': {
 								backgroundColor: '#27ae60',
-								boxShadow: '0 0 10px rgba(0,0,0,0.5)',
+								boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
 							},
 						}}
 					>
