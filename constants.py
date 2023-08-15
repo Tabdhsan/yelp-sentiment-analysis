@@ -1,4 +1,0 @@
-GRAPH_1_BASE_64 = '' 
-GRAPH_2_BASE_64 = '' 
-
-GPT_TEXT =  ''
