@@ -129,7 +129,11 @@ function App() {
 
 			{dataLoaded && (
 				<Button
-					onClick={() => setDataLoaded(false)}
+					onClick={() => {
+						setDataLoaded(false);
+						setFirstUrl('');
+						setSecondUrl('');
+					}}
 					variant='contained'
 					sx={{
 						padding: '18px 36px',
